@@ -15,7 +15,14 @@ import {
   typeTemplate
 } from './templates/template'
 import { customerServiceHeader, serviceHeader, definitionHeader, disableLint } from './templates/serviceHeader'
-import { isOpenApi3, findDeepRefs, setDefinedGenericTypes, getDefinedGenericTypes, trimString } from './utils'
+import {
+  isOpenApi3,
+  findDeepRefs,
+  setDefinedGenericTypes,
+  getDefinedGenericTypes,
+  trimString,
+  setLargeIntegerAsString
+} from './utils'
 import { requestCodegen, IRequestClass, IRequestMethods } from './requestCodegen'
 import { componentsCodegen } from './componentsCodegen'
 import { definitionsCodeGen } from './definitionCodegen'
@@ -40,7 +47,8 @@ const defaultOptions: ISwaggerOptions = {
   extendGenericType: [],
   multipleFileMode: false,
   sharedServiceOptions: false,
-  useHeaderParameters: false
+  useHeaderParameters: false,
+  largeIntegerAsString: true
 }
 
 /** main */
@@ -50,6 +58,7 @@ export async function codegen(params: ISwaggerOptions) {
   let swaggerSource: ISwaggerSource
   let swaggerSpecFileName = `./${params.fileName}_cache_swagger.json`
   setDefinedGenericTypes(params.extendGenericType)
+  setLargeIntegerAsString(params.largeIntegerAsString)
   // 获取接口定义文件
   try {
     if (params.remoteUrl) {

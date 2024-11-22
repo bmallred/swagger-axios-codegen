@@ -41,6 +41,8 @@ export interface ISwaggerOptions {
   useHeaderParameters?: boolean
   /** wrapper response type */
   responseTypeWrapper ?: (responseType: string)=> string
+  /** allow switching large integers as strings or numbers */
+  largeIntegerAsString?: boolean
 }
 
 export interface IPropDef {

@@ -1,9 +1,12 @@
 import { IDefinitionClass, IDefinitionEnum } from './baseInterfaces'
 import { IDefinitionProperty } from './swaggerInterfaces'
 
+let largeIntegerAsString: boolean = true
 let definedGenericTypes: string[] = []
 const UniversalGenericTypes = ['IList', 'List']
 const AbpGenericTypes = ['IListResult', 'ListResultDto', 'IPagedResult', 'PagedResultDto', 'Dictionary', 'IDictionary']
+
+export const setLargeIntegerAsString = (b: boolean) => largeIntegerAsString = b
 
 // 是否是接口类型
 export const isOpenApiGenerics = (s: string) => /^.+\[.+\]$/.test(s) || /^.+\«.+\»$/.test(s) || /^.+\<.+\>$/.test(s)
@@ -91,9 +94,9 @@ export function toBaseType(s: string, format?: string) {
   }
   let result = ''
   switch (s) {
+    case 'Boolean':
     case 'boolean':
     case 'bool':
-    case 'Boolean':
       result = 'boolean'
       break
     case 'array':
@@ -104,7 +107,11 @@ export function toBaseType(s: string, format?: string) {
     case 'int':
     case 'integer':
     case 'number':
-      result = format === 'int64' || format === 'Int64' || format === 'long' ? 'string' : 'number'
+      result = 'number'
+      const isLarge = format === 'int64' || format === 'Int64' || format === 'long'
+      if (isLarge && largeIntegerAsString) {
+        result = 'string'
+      }
       break
     case 'Guid':
     case 'String':

@@ -1,12 +1,12 @@
 {
-  "name": "swagger-axios-codegen",
-  "version": "0.16.14",
+  "name": "@bmallred/swagger-axios-codegen",
+  "version": "0.16.16",
   "main": "./dist/index",
   "typings": "./dist/",
   "author": "Manwei Leung <mic.liangwenwei@foxmail.com>",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/Manweill/swagger-axios-codegen.git",
+    "url": "https://github.com/bmallred/swagger-axios-codegen.git",
     "type": "git"
   },
   "keywords": [

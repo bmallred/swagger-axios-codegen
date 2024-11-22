@@ -1,3 +1,7 @@
+# IMPORTANT
+
+This is a fork of [swagger-axios-codegen](https://github.com/Manweill/swagger-axios-codegen) with the added option `largeIntegerAsString` which allows the code generation to define the type `number` to `int64` or `long` formats instead of using `string`.
+
 # swagger-axios-codegen
 A swagger client uses axios and typescript
 
@@ -76,6 +80,10 @@ export interface ISwaggerOptions {
   sharedServiceOptions?: boolean | undefined
   /** use parameters in header or not*/
   useHeaderParameters?: boolean
+  /** wrapper response type */
+  responseTypeWrapper ?: (responseType: string)=> string
+  /** allow switching large integers as strings or numbers */
+  largeIntegerAsString: boolean
 }
 
 const defaultOptions: ISwaggerOptions = {
